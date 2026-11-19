@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PlaySlot - Find Your Game. Book Your Slot.</title>
+  <meta name="description" content="Book badminton courts, football turfs and cricket grounds near you.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body data-page="home">
+  <div id="site-navbar"></div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <h1>Find Your Game. Book Your Slot.</h1>
+      <p class="lead mt-3">Badminton courts, football turfs and cricket grounds across Bengaluru. Pick a venue, choose an hour and you are on court in minutes.</p>
+      <div class="hero-stats">
+        <div><strong>7</strong><span>Verified venues</span></div>
+        <div><strong>20</strong><span>Courts and turfs</span></div>
+        <div><strong>6 AM - 11 PM</strong><span>Open every day</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search -->
+  <div class="container">
+    <form class="search-panel" id="searchForm">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-3">
+          <label class="form-label" for="searchSport">Sport</label>
+          <select class="form-select" id="searchSport">
+            <option value="">All sports</option><option>Badminton</option><option>Football</option><option>Cricket</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label" for="searchLocation">Location</label>
+          <select class="form-select" id="searchLocation"><option value="">Anywhere in Bengaluru</option></select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label" for="searchDate">Booking date</label>
+          <input type="date" class="form-control" id="searchDate">
+        </div>
+        <div class="col-md-3 d-grid">
+          <button class="btn btn-green btn-lg" type="submit"><i class="bi bi-search me-2"></i>Search venues</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Featured sports -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Pick your sport</h2>
+      <p class="section-sub mb-4">Three sports, one place to book them.</p>
+      <div class="row g-4">
+        <div class="col-md-4"><a class="sport-card" href="venues.html?sport=Badminton">
+          <img src="assets/images/badminton-1.svg" alt="Badminton court">
+          <div class="body"><h4>Badminton</h4><small id="count-Badminton">Indoor wooden and synthetic courts</small></div></a></div>
+        <div class="col-md-4"><a class="sport-card" href="venues.html?sport=Football">
+          <img src="assets/images/football-1.svg" alt="Football turf">
+          <div class="body"><h4>Football Turf</h4><small id="count-Football">5-a-side and 7-a-side turfs</small></div></a></div>
+        <div class="col-md-4"><a class="sport-card" href="venues.html?sport=Cricket">
+          <img src="assets/images/cricket-1.svg" alt="Cricket turf">
+          <div class="body"><h4>Cricket Turf</h4><small id="count-Cricket">Box cricket and practice pitches</small></div></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular venues -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
+        <div><h2 class="section-title mb-1">Popular venues</h2><p class="section-sub mb-0">Top-rated places players keep coming back to.</p></div>
+        <a href="venues.html" class="btn btn-outline-navy">See all venues</a>
+      </div>
+      <div class="row g-4" id="popularVenues"></div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title text-center">How it works</h2>
+      <p class="section-sub text-center mx-auto mb-5">Three quick steps from search to the first serve.</p>
+      <div class="row g-4 text-center">
+        <div class="col-md-4"><div class="step-icon"><i class="bi bi-search"></i></div><h5>Search</h5>
+          <p class="text-muted">Choose your sport, area and date to see venues with open slots.</p></div>
+        <div class="col-md-4"><div class="step-icon"><i class="bi bi-calendar2-check"></i></div><h5>Choose a slot</h5>
+          <p class="text-muted">Pick a court and an hour. Slots that are already taken are greyed out.</p></div>
+        <div class="col-md-4"><div class="step-icon"><i class="bi bi-trophy"></i></div><h5>Play</h5>
+          <p class="text-muted">Confirm with your details, note your booking ID and turn up ready to play.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <div id="confirmHost"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/venues.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book a slot - PlaySlot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body data-page="booking">
+  <div id="site-navbar"></div>
+
+  <header class="page-header">
+    <div class="container"><h1>Book your slot</h1><p>Choose a court, a date and an hour, then confirm with your details.</p></div>
+  </header>
+
+  <main class="container py-4">
+    <!-- Shown when the venue in the URL does not exist -->
+    <div id="venueMissing" class="panel empty-state d-none">
+      <i class="bi bi-geo-alt"></i><h5 class="mt-3">We could not find that venue</h5>
+      <p class="text-muted">It may have been removed. Choose another venue to continue.</p>
+      <a class="btn btn-green" href="venues.html">Browse venues</a>
+    </div>
+
+    <div id="bookingLayout" class="row g-4 d-none">
+      <div class="col-lg-8">
+        <!-- Venue info -->
+        <div class="panel mb-4">
+          <div class="row g-3 align-items-center">
+            <div class="col-md-5"><div id="venueImage"></div></div>
+            <div class="col-md-7">
+              <span class="chip" id="venueSport"></span>
+              <h3 class="mt-2 mb-1" id="venueName"></h3>
+              <div class="venue-meta mb-2"><i class="bi bi-geo-alt me-1"></i><span id="venueLocation"></span>
+                <span class="ms-3"><i class="bi bi-star-fill text-warning me-1"></i><span id="venueRating"></span></span></div>
+              <p class="text-muted mb-2" id="venueDesc"></p>
+              <div class="price-tag" id="venuePrice"></div>
+            </div>
+          </div>
+          <div class="alert alert-warning mt-3 mb-0 d-none" id="venueUnavailable"><i class="bi bi-exclamation-triangle me-2"></i>This venue is not taking bookings right now.</div>
+        </div>
+
+        <!-- Court, date, slots -->
+        <div class="panel mb-4">
+          <h5 class="mb-3">1. Choose court and date</h5>
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label" for="courtSelect">Court</label><select class="form-select" id="courtSelect"></select></div>
+            <div class="col-md-6"><label class="form-label" for="dateInput">Date</label><input type="date" class="form-control" id="dateInput"></div>
+          </div>
+          <h5 class="mt-4 mb-1">2. Pick a time slot</h5>
+          <div class="small text-muted mb-3">
+            <span class="legend-dot" style="background:#fff;border:1.5px solid #cfd8e3"></span>Available
+            <span class="legend-dot ms-3" style="background:var(--navy)"></span>Selected
+            <span class="legend-dot ms-3" style="background:#f1f3f6;border:1px dashed #98a2b3"></span>Booked or past
+          </div>
+          <div class="slot-grid" id="slotGrid" aria-live="polite"></div>
+          <div class="text-danger small mt-2 d-none" id="slotError">Please select a time slot.</div>
+        </div>
+
+        <!-- Customer details -->
+        <form class="panel" id="bookingForm" novalidate>
+          <h5 class="mb-3">3. Your details</h5>
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label" for="custName">Full name</label>
+              <input type="text" class="form-control" id="custName" required minlength="2" autocomplete="name">
+              <div class="invalid-feedback">Enter your full name (at least 2 characters).</div></div>
+            <div class="col-md-6"><label class="form-label" for="custPhone">Phone number</label>
+              <input type="tel" class="form-control" id="custPhone" required pattern="[6-9][0-9]{9}" maxlength="10" inputmode="numeric" autocomplete="tel">
+              <div class="invalid-feedback">Enter a valid 10-digit mobile number.</div></div>
+            <div class="col-12"><label class="form-label" for="custEmail">Email address</label>
+              <input type="email" class="form-control" id="custEmail" required autocomplete="email">
+              <div class="invalid-feedback">Enter a valid email address.</div></div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Summary -->
+      <div class="col-lg-4">
+        <div class="panel summary-sticky">
+          <h5 class="mb-2">Booking summary</h5>
+          <div class="summary-row"><span>Venue</span><span id="sumVenue">-</span></div>
+          <div class="summary-row"><span>Sport</span><span id="sumSport">-</span></div>
+          <div class="summary-row"><span>Court</span><span id="sumCourt">-</span></div>
+          <div class="summary-row"><span>Date</span><span id="sumDate">-</span></div>
+          <div class="summary-row"><span>Time slot</span><span id="sumSlot">Not selected</span></div>
+          <div class="summary-row"><span>Rate</span><span id="sumRate">-</span></div>
+          <div class="summary-total"><span>Total price</span><span class="amt" id="sumTotal">₹0</span></div>
+          <button class="btn btn-green btn-lg w-100 mt-3" id="confirmBtn" type="button"><i class="bi bi-check2-circle me-2"></i>Confirm booking</button>
+          <p class="small text-muted mt-2 mb-0">Demo mode: no payment is taken and the booking is saved in this browser.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Confirmation modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 rounded-4">
+      <div class="modal-body text-center p-4">
+        <div class="success-ring"><i class="bi bi-check-lg"></i></div>
+        <h4 id="successTitle">Booking confirmed</h4>
+        <p class="text-muted">Keep this booking ID for your records.</p>
+        <div class="booking-id-box mb-3" id="successId"></div>
+        <div class="text-start mb-3" id="successDetails"></div>
+        <div class="d-grid gap-2">
+          <a class="btn btn-green" href="my-bookings.html">View my bookings</a>
+          <button class="btn btn-light" data-bs-dismiss="modal" type="button">Book another slot</button>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div id="site-footer"></div>
+  <div id="confirmHost"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

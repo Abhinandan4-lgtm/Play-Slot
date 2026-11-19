@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Venues - PlaySlot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body data-page="venues">
+  <div id="site-navbar"></div>
+
+  <header class="page-header">
+    <div class="container"><h1>All venues</h1><p>Compare courts and turfs, then book the slot that suits you.</p></div>
+  </header>
+
+  <main class="container py-4">
+    <div class="filter-bar mb-4">
+      <div class="row g-3 align-items-end">
+        <div class="col-lg-3"><label class="form-label" for="filterSearch">Search</label>
+          <div class="input-group"><span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+            <input type="search" class="form-control" id="filterSearch" placeholder="Venue, area or sport"></div></div>
+        <div class="col-6 col-lg-2"><label class="form-label" for="filterLocation">Location</label>
+          <select class="form-select" id="filterLocation"><option value="">All locations</option></select></div>
+        <div class="col-6 col-lg-2"><label class="form-label" for="filterPrice">Price per hour</label>
+          <select class="form-select" id="filterPrice">
+            <option value="">Any price</option><option value="0-499">Under ₹500</option><option value="500-1000">₹500 - ₹1,000</option>
+            <option value="1001-1500">₹1,001 - ₹1,500</option><option value="1501-99999">Above ₹1,500</option></select></div>
+        <div class="col-6 col-lg-2"><label class="form-label" for="filterDate">Check availability on</label>
+          <input type="date" class="form-control" id="filterDate"></div>
+        <div class="col-6 col-lg-3 d-flex justify-content-lg-end"><button class="btn btn-outline-navy" id="resetFilters" type="button"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset filters</button></div>
+      </div>
+      <div class="pill-group d-flex flex-wrap gap-2 mt-3" id="sportPills" role="group" aria-label="Sport filter">
+        <button type="button" class="btn btn-outline-secondary active" data-sport="All">All sports</button>
+        <button type="button" class="btn btn-outline-secondary" data-sport="Badminton"><i class="bi bi-dot"></i>Badminton</button>
+        <button type="button" class="btn btn-outline-secondary" data-sport="Football"><i class="bi bi-dot"></i>Football</button>
+        <button type="button" class="btn btn-outline-secondary" data-sport="Cricket"><i class="bi bi-dot"></i>Cricket</button>
+      </div>
+    </div>
+
+    <p class="text-muted" id="resultCount" aria-live="polite"></p>
+    <div class="row g-4" id="venueGrid"></div>
+  </main>
+
+  <div id="site-footer"></div>
+  <div id="confirmHost"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/venues.js"></script>
+</body>
+</html>
